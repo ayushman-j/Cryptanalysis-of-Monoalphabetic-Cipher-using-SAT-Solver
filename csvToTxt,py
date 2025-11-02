@@ -1,0 +1,16 @@
+import csv
+
+input_csv = "english_3grams.csv"        # your Kaggle file
+output_txt = "trigram_counts.txt"       # file to be used in project
+
+with open(input_csv, "r", encoding="utf-8") as csvfile, open(output_txt, "w", encoding="utf-8") as outfile:
+    reader = csv.DictReader(csvfile)
+    
+    for row in reader:
+        word = row['trigram'].lower().strip()
+        freq = row['freq'].strip()
+        
+        if word.isalpha():  # ignore words with punctuation/numbers
+            outfile.write(f"{word} {freq}\n")
+
+print("✅ Converted to trigram_counts.txt successfully!")
